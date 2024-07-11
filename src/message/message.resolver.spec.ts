@@ -49,7 +49,7 @@ const chatMessage: ChatMessage = {
   resolved: false,
   likes: [],
   likesCount: 0,
-  messageTags: MessageTagType.Black,
+  messageTags: [MessageTagType.Black],
 };
 
 describe('MessageResolver', () => {

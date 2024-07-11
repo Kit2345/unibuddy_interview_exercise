@@ -155,8 +155,8 @@ export class ChatMessageModel {
   })
   reactions?: Reaction[];
 
-  @Prop({ type: String, enum: MessageTagType })
-  messageTags?: MessageTagType;
+  @Prop({ type: [String], enum: MessageTagType })
+  messageTags?: [MessageTagType];
 
   /**
    * All the properties below are virtual properties
