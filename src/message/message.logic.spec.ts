@@ -132,7 +132,6 @@ const replyMessageModel: ChatMessageModel = {
   resolved: false,
   likes: [],
   likesCount: 0,
-  messageTags: 'test',
 };
 
 const USER_BLOCK_DTO = {
