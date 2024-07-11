@@ -16,6 +16,14 @@ registerEnumType(GifType, {
   name: 'GifType',
 });
 
+export enum MessageTagType {
+  Asian = 'asian',
+  Black = 'black',
+  Gay = 'gay',
+  Lgbtq = 'lgbtq',
+  Trans = 'trans',
+}
+
 @InputType()
 export class ReplyMessageDto {
   @Field()

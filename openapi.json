@@ -981,7 +981,14 @@
                         "type": "boolean"
                     },
                     "messageTags": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                            "asian",
+                            "black",
+                            "gay",
+                            "lgbtq",
+                            "trans"
+                        ]
                     }
                 },
                 "required": [

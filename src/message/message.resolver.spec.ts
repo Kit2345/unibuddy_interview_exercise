@@ -12,6 +12,7 @@ import {
   LikeMessageDto,
   ReactionDto,
   PollDto,
+  MessageTagType,
 } from './models/message.dto';
 import { ObjectID } from 'mongodb';
 import { IAuthenticatedUser } from '../authentication/jwt.strategy';
@@ -48,7 +49,7 @@ const chatMessage: ChatMessage = {
   resolved: false,
   likes: [],
   likesCount: 0,
-  messageTags: 'test',
+  messageTags: MessageTagType.Black,
 };
 
 describe('MessageResolver', () => {

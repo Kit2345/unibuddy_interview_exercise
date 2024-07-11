@@ -2,7 +2,7 @@ import { ObjectType, ID, Field, Float, Directive } from '@nestjs/graphql';
 import { ObjectID } from 'mongodb';
 import { UserField, MessageSender } from '../../user/models/user.model';
 import { ChatConversation } from '../../conversation/models/ChatConversation.entity';
-import { AttachmentType, GifType } from './message.dto';
+import { AttachmentType, GifType, MessageTagType } from './message.dto';
 import { Reaction } from './message.model';
 import { string } from 'joi';
 
@@ -150,8 +150,8 @@ export class ChatMessage {
   @Field({ defaultValue: false, nullable: true })
   isSenderBlocked?: boolean;
 
-  @Field(() => String, { nullable: true })
-  messageTags?: string;
+  @Field(() => MessageTagType, { nullable: true })
+  messageTags?: MessageTagType;
 }
 
 /***

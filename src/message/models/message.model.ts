@@ -1,7 +1,7 @@
 import { Document } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'mongodb';
-import { AttachmentType, GifType } from './message.dto';
+import { AttachmentType, GifType, MessageTagType } from './message.dto';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { string } from 'joi';
 
@@ -155,8 +155,9 @@ export class ChatMessageModel {
   })
   reactions?: Reaction[];
 
-  @Prop()
-  messageTags?: string;
+  @Prop({ type: String, enum: MessageTagType })
+  messageTags?: MessageTagType;
+
   /**
    * All the properties below are virtual properties
    * @url https://mongoosejs.com/docs/tutorials/virtuals.html
