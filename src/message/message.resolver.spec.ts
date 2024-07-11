@@ -48,6 +48,7 @@ const chatMessage: ChatMessage = {
   resolved: false,
   likes: [],
   likesCount: 0,
+  messageTags: 'try',
 };
 
 describe('MessageResolver', () => {

@@ -979,6 +979,9 @@
                     },
                     "isSenderBlocked": {
                         "type": "boolean"
+                    },
+                    "messageTags": {
+                        "type": "string"
                     }
                 },
                 "required": [
