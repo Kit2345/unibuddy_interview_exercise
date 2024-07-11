@@ -26,6 +26,7 @@ import {
   MessagesFilterInput,
   MessageGroupedByConversationOutput,
 } from '../conversation/models/messagesFilterInput';
+import { constants } from 'buffer';
 
 const conversationId = new ObjectID('5fe0cce861c8ea54018385af');
 const messageId = new ObjectID('5fe0cce861c8ea54018386ab');
@@ -39,6 +40,7 @@ const authenticatedUser: IAuthenticatedUser = {
   userId,
   accountRole: 'admin',
 };
+const twoMessageTags = [MessageTagType.Black, MessageTagType.Gay];
 
 const chatMessage: ChatMessage = {
   id: messageId,
@@ -49,7 +51,6 @@ const chatMessage: ChatMessage = {
   resolved: false,
   likes: [],
   likesCount: 0,
-  messageTags: [MessageTagType.Black],
 };
 
 describe('MessageResolver', () => {
@@ -273,6 +274,36 @@ describe('MessageResolver', () => {
           },
           text: 'test',
         },
+        { accountRole: 'admin', userId },
+      );
+    });
+
+    it('should send a message with 1 message tag', () => {
+      jest.spyOn(messageLogic, 'create');
+      const message: MessageDto = {
+        text: 'test',
+        conversationId,
+        messageTags: [MessageTagType.Black],
+      };
+
+      resolver.sendConversationMessage(message, authenticatedUser);
+      expect(messageLogic.create).toBeCalledWith(
+        { conversationId, messageTags: ['black'], text: 'test' },
+        { accountRole: 'admin', userId },
+      );
+    });
+
+    it('should send a message with 2 message tag', () => {
+      jest.spyOn(messageLogic, 'create');
+      const message: MessageDto = {
+        text: 'test',
+        conversationId,
+        messageTags: twoMessageTags,
+      };
+
+      resolver.sendConversationMessage(message, authenticatedUser);
+      expect(messageLogic.create).toBeCalledWith(
+        { conversationId, messageTags: ['black', 'gay'], text: 'test' },
         { accountRole: 'admin', userId },
       );
     });

@@ -151,7 +151,7 @@ export class ChatMessage {
   isSenderBlocked?: boolean;
 
   @Field(() => [MessageTagType], { nullable: true })
-  messageTags?: [MessageTagType];
+  messageTags?: MessageTagType[];
 }
 
 /***

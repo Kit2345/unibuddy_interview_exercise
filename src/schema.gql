@@ -99,13 +99,21 @@ type ChatMessage {
   richContent: RichMessageContent
   reactions: [Reaction!]
   isSenderBlocked: Boolean
-  messageTags: String
+  messageTags: [MessageTagType!]
 }
 
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+enum MessageTagType {
+  Asian
+  Black
+  Gay
+  Lgbtq
+  Trans
+}
 
 type PaginatedChatMessages {
   messages: [ChatMessage!]!
@@ -182,6 +190,7 @@ input MessageDto {
   text: String!
   conversationId: ObjectId!
   richContent: RichContentDto
+  messageTags: [MessageTagType!]
 }
 
 input RichContentDto {

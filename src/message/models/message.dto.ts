@@ -24,6 +24,10 @@ export enum MessageTagType {
   Trans = 'trans',
 }
 
+registerEnumType(MessageTagType, {
+  name: 'MessageTagType',
+});
+
 @InputType()
 export class ReplyMessageDto {
   @Field()
@@ -126,6 +130,9 @@ export class MessageDto {
 
   @Field(() => RichContentDto, { nullable: true })
   richContent?: RichContentDto;
+
+  @Field(() => [MessageTagType], { nullable: true })
+  messageTags?: MessageTagType[];
 }
 
 // TODO Min - Max on limit

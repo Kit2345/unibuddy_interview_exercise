@@ -983,7 +983,14 @@
                     "messageTags": {
                         "type": "array",
                         "items": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": [
+                                "asian",
+                                "black",
+                                "gay",
+                                "lgbtq",
+                                "trans"
+                            ]
                         }
                     }
                 },
