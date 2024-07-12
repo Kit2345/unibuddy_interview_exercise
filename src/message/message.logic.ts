@@ -13,6 +13,7 @@ import {
   ResolveMessageDto,
   ReactionDto,
   PollOptionDto,
+  MessageTagDto,
 } from './models/message.dto';
 import { MessageData } from './message.data';
 import { IAuthenticatedUser } from '../authentication/jwt.strategy';
@@ -29,6 +30,7 @@ import {
   UnresolveMessageEvent,
   ReactedMessageEvent,
   UnReactedMessageEvent,
+  MessageTagEvent,
 } from '../conversation/conversation-channel.socket';
 import { UserService } from '../user/user.service';
 import { ConversationData } from '../conversation/conversation.data';
@@ -278,7 +280,6 @@ export class MessageLogic implements IMessageLogic {
     return blockedUsers.map((user) => user.blockedUserId);
   }
 
-
   async getChatConversationMessages(
     getMessageDto: GetMessageDto,
     authenticatedUser: IAuthenticatedUser,
@@ -313,7 +314,6 @@ export class MessageLogic implements IMessageLogic {
       paginatedChatMessages,
       blockedUserIds,
     );
-  
 
     return paginatedChatMessages;
   }
@@ -564,6 +564,43 @@ export class MessageLogic implements IMessageLogic {
     this.conversationChannel.send(
       messageEvent,
       reaction.conversationId.toHexString(),
+    );
+
+    return message;
+  }
+
+  async addMessageTagToMessage(
+    messageTags: MessageTagDto,
+    authenticatedUser: IAuthenticatedUser,
+  ) {
+    await this.throwForbiddenErrorIfNotAuthorized(
+      authenticatedUser,
+      messageTags.messageId,
+      Action.readConversation,
+    );
+
+    // let message;
+    // for (const tag of messageTags.messageTags) {
+    //   let message = await this.messageData.addMessageTag(
+    //     tag,
+    //     messageTags.messageId,
+    //   );
+    //   return message;
+    // }
+
+    const message = await this.messageData.addMessageTag(
+      messageTags.messageTags[0],
+      authenticatedUser.userId,
+    );
+
+    const messageEvent = new MessageTagEvent({
+      userId: authenticatedUser.userId,
+      messageId: messageTags.messageId,
+      messageTags: messageTags.messageTags,
+    });
+    this.conversationChannel.send(
+      messageEvent,
+      messageTags.conversationId.toHexString(),
     );
 
     return message;

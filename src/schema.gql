@@ -167,6 +167,7 @@ type Mutation {
   unlikeConversationMessage(likeMessageDto: LikeMessageDto!): ChatMessage!
   addReactionToMessage(reactionDto: ReactionDto!): ChatMessage!
   removeReactionFromMessage(reactionDto: ReactionDto!): ChatMessage!
+  addMessageTagToMessage(messageTagDto: MessageTagDto!): ChatMessage!
   addVote(option: String!, chatMessageId: ObjectId!): Poll!
   removeVote(option: String!, chatMessageId: ObjectId!): Poll!
 }
@@ -255,5 +256,10 @@ input ReactionDto {
   reaction: String!
   reactionUnicode: String!
   messageId: ObjectId!
+  conversationId: ObjectId!
+}
+
+input MessageTagDto {
+  messageTags: [MessageTagType!]!
   conversationId: ObjectId!
 }

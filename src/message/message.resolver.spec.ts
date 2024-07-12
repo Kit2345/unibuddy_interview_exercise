@@ -13,6 +13,7 @@ import {
   ReactionDto,
   PollDto,
   MessageTagType,
+  MessageTagDto,
 } from './models/message.dto';
 import { ObjectID } from 'mongodb';
 import { IAuthenticatedUser } from '../authentication/jwt.strategy';
@@ -188,6 +189,13 @@ describe('MessageResolver', () => {
 
     removeReactionFromMessage(
       reactionDto: ReactionDto,
+      authenticatedUser?: IAuthenticatedUser,
+    ): Promise<ChatMessage> {
+      return Promise.resolve(chatMessage);
+    }
+
+    addMessageTagToMessage(
+      messageTagDto: MessageTagDto,
       authenticatedUser?: IAuthenticatedUser,
     ): Promise<ChatMessage> {
       return Promise.resolve(chatMessage);
@@ -552,15 +560,14 @@ describe('MessageResolver', () => {
     });
   });
 
-  describe('add message tag to a message', () => {
-    it('should add one message tag to a message', () => {
+  describe('add message tag to an exisiting message', () => {
+    it('should add one message tag to an exisiting message', () => {
       jest.spyOn(messageLogic, 'addMessageTagToMessage');
 
-      const messageTagDto: MesssageTagDto = {
+      const messageTagDto: MessageTagDto = {
         messageId,
         conversationId,
-        reaction: ':like',
-        reactionUnicode: ':likecode',
+        messageTags: [MessageTagType.Trans],
       };
 
       resolver.addMessageTagToMessage(messageTagDto, authenticatedUser);

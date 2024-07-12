@@ -7,7 +7,11 @@ import {
   ChatMessageModel,
 } from './models/message.model';
 import { ChatMessage, PaginatedChatMessages } from './models/message.entity';
-import { MessageDto, GetMessageDto } from './models/message.dto';
+import {
+  MessageDto,
+  GetMessageDto,
+  MessageTagType,
+} from './models/message.dto';
 import { ObjectID } from 'mongodb';
 import { createRichContent } from './utils/message.helper';
 import { MessageGroupedByConversationOutput } from '../conversation/models/messagesFilterInput';
@@ -261,6 +265,32 @@ export class MessageData {
     if (!updatedResult || updatedResult.matchedCount === 0) {
       throw new Error(
         `Failed to remove reaction, messageId: ${messageId.toHexString()}, reaction: ${reaction}, userId: ${userId.toHexString()}`,
+      );
+    }
+
+    return this.getMessage(messageId.toHexString());
+  }
+
+  async addMessageTag(
+    messageTag: string,
+    messageId: ObjectID,
+  ): Promise<ChatMessage> {
+    const query = { _id: messageId };
+    const updateDocument = {
+      $addToSet: { messageTags: messageTag },
+    };
+    const updatedResult = await this.chatMessageModel.findOneAndUpdate(
+      query,
+      updateDocument,
+      {
+        new: true,
+        returnOriginal: false,
+      },
+    );
+
+    if (!updatedResult) {
+      throw new Error(
+        `Failed to add tag to messageId: ${messageId.toHexString()}, messageTag: ${messageTag}`,
       );
     }
 
