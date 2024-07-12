@@ -579,6 +579,25 @@ describe('MessageResolver', () => {
         },
       );
     });
+
+    it('should add two message tags to an exisiting message', () => {
+      jest.spyOn(messageLogic, 'addMessageTagToMessage');
+
+      const messageTagDto: MessageTagDto = {
+        messageId,
+        conversationId,
+        messageTags: [MessageTagType.Trans, MessageTagType.Asian],
+      };
+
+      resolver.addMessageTagToMessage(messageTagDto, authenticatedUser);
+      expect(messageLogic.addMessageTagToMessage).toBeCalledWith(
+        messageTagDto,
+        {
+          accountRole: 'admin',
+          userId,
+        },
+      );
+    });
   });
 
   describe('add poll to message', () => {
