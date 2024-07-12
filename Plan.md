@@ -48,8 +48,11 @@ The rough approach is:
 
 12. Write tests to add/remove/edit tags by someone other than sender.
 
-- What problems you might encounter
-  My biggest problems so far seem to be unfamilar tech stack. I have basic knowledge of Typescript only, Graphql, mongoDB, docker, and nestjs are all new.
+Notes and initial thoughts on:
+
+What problems you might encounter
+
+- My biggest problems so far seem to be unfamilar tech stack. I have basic knowledge of Typescript only, Graphql, mongoDB, docker, and nestjs are all new.
 
 - Type errors!
 
@@ -57,6 +60,6 @@ The rough approach is:
 
 How you would go about testing
 
-- test data flow through pipeline, and getting correct data.
+- test data flow through pipeline (resolver), and getting correct data (data).
 
 What you might do differently
