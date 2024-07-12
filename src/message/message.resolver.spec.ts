@@ -552,6 +552,28 @@ describe('MessageResolver', () => {
     });
   });
 
+  describe('add message tag to a message', () => {
+    it('should add one message tag to a message', () => {
+      jest.spyOn(messageLogic, 'addMessageTagToMessage');
+
+      const messageTagDto: MesssageTagDto = {
+        messageId,
+        conversationId,
+        reaction: ':like',
+        reactionUnicode: ':likecode',
+      };
+
+      resolver.addMessageTagToMessage(messageTagDto, authenticatedUser);
+      expect(messageLogic.addMessageTagToMessage).toBeCalledWith(
+        messageTagDto,
+        {
+          accountRole: 'admin',
+          userId,
+        },
+      );
+    });
+  });
+
   describe('add poll to message', () => {
     it('should add a poll to a message', () => {
       jest.spyOn(messageLogic, 'create');
