@@ -51,9 +51,9 @@ The rough approach is:
 - What problems you might encounter
   My biggest problems so far seem to be unfamilar tech stack. I have basic knowledge of Typescript only, Graphql, mongoDB, docker, and nestjs are all new.
 
-Type errors!
+- Type errors!
 
-I suspect searching will be a problem. Both in terms of implementing a clean friendly UI, displaying results in a meaningful way (to users). And problems with database getting big.
+- I suspect searching will be a problem. Both in terms of implementing a clean friendly UI, displaying results in a meaningful way (to users). And problems with database getting big.
 
 - How you would go about testing
   test data flow through pipeline, and getting correct data.
