@@ -1,4 +1,4 @@
-Implementing tags to messages sounds like a really useful feature. First I try and understand why we want to implement this feature, my mind jumps to the use case of flagging messages for the minority voice, for example if someone asks about safety around campus, a woman, man and trans poster might have very different answers. With this in mind I think about having pre-determined message tags, and the way i have tried to implement this is similiar to reactions but only possible by sender and not anyone else and resolved/deleted/liked in that it is a metadata and kept seprate from richcontent.
+Implementing tags for messages sounds like a really useful feature. To help make sure I'd implemented it right, it would be great to know the use case, but I imagined it could be flagging topics by categories people might want to filter by, like demographics. So I thought about having pre-determined message tags, and an implementation similar to reactions, but only set by the sender.
 
 I have taken a TDD approach; with writing failing tests and then implementing code to pass these tests. I have broken it down into flow/end-to-end (message.resolver.spec.ts) and data (message.data.spec.ts). So far I have looked at resolver tests, but havent added data tests.
 
@@ -28,6 +28,8 @@ The rough approach is:
 
 7. Fix to pass adding tags tests
 
+- Need to go through my types when passing messagtags through Graphql->resolver->data pipelines. I get errors with type.
+
 8. Write tests for removing tags to an exisiting message
 
 - remove single tag from a message
@@ -49,8 +51,11 @@ The rough approach is:
 - What problems you might encounter
   My biggest problems so far seem to be unfamilar tech stack. I have basic knowledge of Typescript only, Graphql, mongoDB, docker, and nestjs are all new.
 
+Type errors!
+
 I suspect searching will be a problem. Both in terms of implementing a clean friendly UI, displaying results in a meaningful way (to users). And problems with database getting big.
 
 - How you would go about testing
+  test data flow through pipeline, and getting correct data.
 
 - What you might do differently
