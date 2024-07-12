@@ -55,7 +55,8 @@ The rough approach is:
 
 - I suspect searching will be a problem. Both in terms of implementing a clean friendly UI, displaying results in a meaningful way (to users). And problems with database getting big.
 
-- How you would go about testing
-  test data flow through pipeline, and getting correct data.
+How you would go about testing
 
-- What you might do differently
+- test data flow through pipeline, and getting correct data.
+
+What you might do differently
